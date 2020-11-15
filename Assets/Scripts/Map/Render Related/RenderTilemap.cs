@@ -6,11 +6,14 @@ using UnityEngine.Tilemaps;
 public class RenderTilemap : MonoBehaviour
 {
     Tilemap gridMap;
+    public TileBase missingTile;
     public TileBase floorTile;
     public TileBase wallTile;
-    public TileBase missingTile;
+    public TileBase doorTile;
+    public TileBase walkTile;
+    public TileBase hullTile;
 
-    private void Start()
+    private void Awake()
     {
         gridMap = FindObjectOfType<Tilemap>();
     }
@@ -31,6 +34,15 @@ public class RenderTilemap : MonoBehaviour
                             break;
                         case "floor":
                             gridMap.SetTile(tilePosition, floorTile);
+                            break;
+                        case "door":
+                            gridMap.SetTile(tilePosition, doorTile);
+                            break;
+                        case "walk":
+                            gridMap.SetTile(tilePosition, walkTile);
+                            break;
+                        case "hull":
+                            gridMap.SetTile(tilePosition, hullTile);
                             break;
                         default:
                             Debug.LogWarning("Map coordinates x:" + x + " y:" + y + " has no sprite associated with it! " +

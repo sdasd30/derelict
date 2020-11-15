@@ -743,9 +743,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cacc1d12246dff1448936af100bf0eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missingTile: {fileID: 11400000, guid: d40aa7cb586d6f54688665c42cd5d4ea, type: 2}
   floorTile: {fileID: 11400000, guid: 8e1ce58afe701b743a2d34ed394e7117, type: 2}
   wallTile: {fileID: 11400000, guid: 06234a2fd5b735a4d8efc0c42dbfdfea, type: 2}
-  missingTile: {fileID: 11400000, guid: d40aa7cb586d6f54688665c42cd5d4ea, type: 2}
+  doorTile: {fileID: 11400000, guid: 804df94cf8b23be43917de634db2f37f, type: 2}
 --- !u!1 &1172247246
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,7 +800,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -823,7 +824,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172247246}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 37, y: 20, z: -10}
+  m_LocalPosition: {x: 17.73, y: 10.12, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -938,9 +939,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652558252}
-  - component: {fileID: 1652558251}
   - component: {fileID: 1652558253}
   - component: {fileID: 1652558254}
+  - component: {fileID: 1652558251}
+  - component: {fileID: 1652558255}
+  - component: {fileID: 1652558256}
+  - component: {fileID: 1652558257}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -957,17 +961,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1652558250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049dec526718ed745a8d4d5099a1c19b, type: 3}
+  m_Script: {fileID: 11500000, guid: 44507bac5d9e93d4285256ea76d8cb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 40
-  mapHeight: 40
-  widthMinRoom: 8
+  mapWidth: 100
+  mapHeight: 100
+  widthMinRoom: 10
   widthMaxRoom: 15
-  heightMinRoom: 8
+  heightMinRoom: 10
   heightMaxRoom: 15
-  maxCorridorLength: 2
-  maxFeatures: 2
+  maxFeatures: 10
+  maxAttempts: 100
+  featureCount: 0
+  allFeatures: []
 --- !u!4 &1652558252
 Transform:
   m_ObjectHideFlags: 0
@@ -1006,9 +1012,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cacc1d12246dff1448936af100bf0eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missingTile: {fileID: 11400000, guid: d40aa7cb586d6f54688665c42cd5d4ea, type: 2}
   floorTile: {fileID: 11400000, guid: 8e1ce58afe701b743a2d34ed394e7117, type: 2}
   wallTile: {fileID: 11400000, guid: 06234a2fd5b735a4d8efc0c42dbfdfea, type: 2}
-  missingTile: {fileID: 11400000, guid: d40aa7cb586d6f54688665c42cd5d4ea, type: 2}
+  doorTile: {fileID: 11400000, guid: 804df94cf8b23be43917de634db2f37f, type: 2}
+--- !u!114 &1652558255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652558250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84349782a2d738f4bb5d264c5360b91a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1652558256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652558250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f37d9c4d3553acc49b13f00ddda4515d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PathMultiplier: 1
+--- !u!114 &1652558257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652558250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65631ce5283a48c4d8126b3344e10f39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2083718970
 GameObject:
   m_ObjectHideFlags: 0

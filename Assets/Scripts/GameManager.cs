@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    MapGenerator mapGen;
+    MapGenerator2 mapGen;
     RenderTilemap render;
 
     private void Start()
     {
-        mapGen = GetComponent<MapGenerator>();
+        mapGen = GetComponent<MapGenerator2>();
         render = GetComponent<RenderTilemap>();
 
         MakeMap();
@@ -17,9 +17,18 @@ public class GameManager : MonoBehaviour
 
     public void MakeMap()
     {
-        mapGen.InitializeMap();
-        mapGen.FirstRoom();
+        mapGen.BuildMap();
+
         render.ClearMap();
         render.DrawMap();
+        //GetComponent<DEBUGDrawCenterPoints>().drawPoints();
+    }
+
+    public void RebuildMap()
+    {
+        render.ClearMap();
+        mapGen.ClearMap();
+
+        MakeMap();
     }
 }
