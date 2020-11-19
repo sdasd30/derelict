@@ -12,6 +12,9 @@ public class RenderTilemap : MonoBehaviour
     public TileBase doorTile;
     public TileBase walkTile;
     public TileBase hullTile;
+    public TileBase debugTile;
+
+    public bool uglyDoor;
 
     private void Awake()
     {
@@ -57,6 +60,42 @@ public class RenderTilemap : MonoBehaviour
                 }
             }
         }
+
+        if (uglyDoor)
+        {
+            foreach (Tile tipo in MapManager.map)
+            {
+                if (tipo.type == "door")
+                {
+                    gridMap.SetTile(new Vector3Int(tipo.position.x, tipo.position.y, 0), debugTile);
+                }
+            }
+        }
+
+        //foreach (Tile tile in MapManager.map)
+        //{
+        //    gridMap.SetTileFlags(new Vector3Int(tile.position.x, tile.position.y, 0), TileFlags.None);
+        //    gridMap.SetColor(new Vector3Int(tile.position.x, tile.position.y, 0), Color.clear);
+        //}
+    }
+
+    public void UpdateVisibility()
+    { //THIS SCRIPT SHOULD NOT UPDATE EVERY FRAME! IT SHOULD UPDATE ONLY WHEN PLAYER GETS CONTROL.
+        foreach (Tile tile in MapManager.map)
+        {
+            if (tile.isVisible)
+            {
+                gridMap.SetColor(new Vector3Int(tile.position.x, tile.position.y, 0), Color.white);
+            }
+            else if (tile.isExplored)
+            {
+                gridMap.SetColor(new Vector3Int(tile.position.x, tile.position.y, 0), new Color(.2f,.2f,.2f,1));
+            }
+        }
+    }
+
+    private void Update()
+    {
     }
 
     public void ClearMap()

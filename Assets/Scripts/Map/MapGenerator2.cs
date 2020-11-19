@@ -43,6 +43,8 @@ public class MapGenerator2 : MonoBehaviour
                     MapManager.map[x, y].type = "hull";
                     MapManager.map[x, y].sprite = "hull";
                     MapManager.map[x, y].occupied = true;
+                    MapManager.map[x, y].isOpaque
+                        = true;
                 }
             }
         }
@@ -52,7 +54,7 @@ public class MapGenerator2 : MonoBehaviour
     {
         InitializeMap();
         ClearMap();
-        Debug.Log("Started map generation...");
+        //Debug.Log("Started map generation...");
         for (int i = 0; i < maxAttempts; i++)
         {
             GenerateRoom("room", "Room");
@@ -60,8 +62,10 @@ public class MapGenerator2 : MonoBehaviour
             if (featureCount >= maxFeatures) 
                 break;
         }
+
         GetComponent<GeneratePaths>().GenerateMesh();
         GetComponent<GenerateCorridors>().BuildCorridors();
+
 
         FillNullSpace();
     }
@@ -121,6 +125,7 @@ public class MapGenerator2 : MonoBehaviour
                     MapManager.map[position.x, position.y].type = "wall";
                     MapManager.map[position.x, position.y].sprite = "wall";
                     MapManager.map[position.x, position.y].occupied = true;
+                    MapManager.map[position.x, position.y].isOpaque = true;
                 }
 
                 if (y == room.height - 1)
@@ -130,6 +135,7 @@ public class MapGenerator2 : MonoBehaviour
                     MapManager.map[position.x, position.y].type = "wall";
                     MapManager.map[position.x, position.y].sprite = "wall";
                     MapManager.map[position.x, position.y].occupied = true;
+                    MapManager.map[position.x, position.y].isOpaque = true;
                 }
 
                 if (x == 0)
@@ -139,6 +145,7 @@ public class MapGenerator2 : MonoBehaviour
                     MapManager.map[position.x, position.y].type = "wall";
                     MapManager.map[position.x, position.y].sprite = "wall";
                     MapManager.map[position.x, position.y].occupied = true;
+                    MapManager.map[position.x, position.y].isOpaque = true;
                 }
 
                 if (x == room.width - 1)
@@ -148,6 +155,7 @@ public class MapGenerator2 : MonoBehaviour
                     MapManager.map[position.x, position.y].type = "wall";
                     MapManager.map[position.x, position.y].sprite = "wall";
                     MapManager.map[position.x, position.y].occupied = true;
+                    MapManager.map[position.x, position.y].isOpaque = true;
                 }
 
                 if (MapManager.map[position.x, position.y].type != "wall")

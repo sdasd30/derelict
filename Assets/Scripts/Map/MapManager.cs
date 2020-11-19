@@ -18,6 +18,10 @@ public class Tile
     public GameObject objectType; //The maptype object attached to the tile. Defines what kind of map object. Is it floor or wall or space?
     public string type; //Type of the object. Floor, wall, etc.
     public string sprite;
+
+    public bool isVisible = false;
+    public bool isOpaque = false;
+    public bool isExplored = false;
 }
 
 

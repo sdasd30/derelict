@@ -99,6 +99,7 @@ public class GenerateCorridors : MonoBehaviour
         MapManager.map[startTile.x, startTile.y].type = "door";
         MapManager.map[startTile.x, startTile.y].sprite = "door";
         MapManager.map[startTile.x, startTile.y].occupied = false;
+        MapManager.map[startTile.x, startTile.y].isOpaque = false;
         Build(building, destination, bd);
 
         startTile = destination;
@@ -171,6 +172,7 @@ public class GenerateCorridors : MonoBehaviour
         MapManager.map[startTile.x, startTile.y].type = "door";
         MapManager.map[startTile.x, startTile.y].sprite = "door";
         MapManager.map[startTile.x, startTile.y].occupied = false;
+        MapManager.map[startTile.x, startTile.y].isOpaque = false;
 
         Build(building, destination, bd);
 
@@ -187,6 +189,7 @@ public class GenerateCorridors : MonoBehaviour
                     MapManager.map[building.x, building.y].type = "door";
                     MapManager.map[building.x, building.y].sprite = "door";
                     MapManager.map[building.x, building.y].occupied = false;
+                    MapManager.map[building.x, building.y].isOpaque = false;
                 }
             }
             else
@@ -222,6 +225,7 @@ public class GenerateCorridors : MonoBehaviour
                 MapManager.map[building.x, building.y].type = "door";
                 MapManager.map[building.x, building.y].sprite = "door";
                 MapManager.map[building.x, building.y].occupied = false;
+                MapManager.map[building.x, building.y].isOpaque = false;
             }
         }
     }
