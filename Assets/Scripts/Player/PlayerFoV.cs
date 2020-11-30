@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFoV : MonoBehaviour //Also known as FoV 2. This is raycasting and leaves ugly artefacts, but it works for now.
+public class PlayerFoV : MonoBehaviour //Also known as FoV 1. This is Bresenham raycasting.
 {
     public int maxDistance; //Should be even
     EntityPosition playerPos;
@@ -95,7 +95,7 @@ public class PlayerFoV : MonoBehaviour //Also known as FoV 2. This is raycasting
         return cells;
     } //Implementaiton 1
 
-    public static List<Vector2Int> Bresenham(Vector2Int start, Vector2Int end) //Implementation 2
+    public static List<Vector2Int> Bresenham(Vector2Int start, Vector2Int end) //Implementation 2. Broken
     {
         List<Vector2Int> cells = new List<Vector2Int>();
         int x0 = start.x;
@@ -220,19 +220,18 @@ public class PlayerFoV : MonoBehaviour //Also known as FoV 2. This is raycasting
     List<Vector2Int> SeeWalls(Vector2Int cell)
     {
         List<Vector2Int> newSight = new List<Vector2Int>();
-        //if (!MapManager.map[cell.x, cell.y].isOpaque)
-        //{
-        //    for (int row = -1; row <= 1; row++)
-        //    {
-        //        for (int col = -1; col <= 1; col++)
-        //        {
-        //            if (MapManager.map[cell.x + row, cell.y + col].isOpaque)
-        //            {
-        //                newSight.Add(new Vector2Int(cell.x + row, cell.y + col));
-        //            }
-        //        }
-        //    }
-        //}
+        if (!MapManager.map[cell.x, cell.y].isOpaque)
+        {
+            for (int row = -1; row <= 1; row++)
+            {
+                for (int col = -1; col <= 1; col++)
+                {
+                    //if (MapManager.map[cell.x + row, cell.y + col].isOpaque)
+                    newSight.Add(new Vector2Int(cell.x + row, cell.y + col));
+
+                }
+            }
+        }
 
         //if (!MapManager.map[cell.x, cell.y].isOpaque){
         //    if (MapManager.map[cell.x + 1, cell.y].isOpaque)

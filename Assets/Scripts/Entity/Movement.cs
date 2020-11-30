@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
 {
     EntityPosition pos;
     PlayerFoV fov;
+    PlayerFoV3 fov3;
     bool isPlayer;
 
     private void Awake()
@@ -15,6 +16,7 @@ public class Movement : MonoBehaviour
         if (isPlayer)
         {
             fov = GetComponent<PlayerFoV>();
+            fov3 = GetComponent<PlayerFoV3>();
         }
     }
     public void AttemptMovement(Direction dir)
@@ -47,6 +49,7 @@ public class Movement : MonoBehaviour
         if (isPlayer)
         {
             fov.CheckFov();
+            fov3.CheckFov();
         }
     }
 }
