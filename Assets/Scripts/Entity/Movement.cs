@@ -5,10 +5,17 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     EntityPosition pos;
+    PlayerFoV fov;
+    bool isPlayer;
 
     private void Awake()
     {
         pos = GetComponent<EntityPosition>();
+        isPlayer = (GetComponent<PlayerFoV>() != null);
+        if (isPlayer)
+        {
+            fov = GetComponent<PlayerFoV>();
+        }
     }
     public void AttemptMovement(Direction dir)
     {
@@ -31,9 +38,15 @@ public class Movement : MonoBehaviour
         }
 
         Vector2Int updatePosition = pos.GetPosition() + move;
+
         if (!MapManager.map[updatePosition.x, updatePosition.y].occupied)
         {
             pos.SetPosition(updatePosition);
+        }
+
+        if (isPlayer)
+        {
+            fov.CheckFov();
         }
     }
 }

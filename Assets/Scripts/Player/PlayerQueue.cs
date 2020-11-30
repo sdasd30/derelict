@@ -37,10 +37,8 @@ public class PlayerQueue : MonoBehaviour
     {
         if (!playerTurn)
         {
-            Debug.Log("Its not your turn!!");
             return false;
         }
-
         gt.ElapseTime(time);
         playerTurn = false;
 

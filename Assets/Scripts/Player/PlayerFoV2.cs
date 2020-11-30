@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaitWhenCan : MonoBehaviour
+public class PlayerFoV2 : MonoBehaviour
 {
     // Start is called before the first frame update
-    Queue q;
-    void Awake()
+    void Start()
     {
-        q = GetComponent<Queue>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!q.Exhausted())
-        {
-            q.DoAction(100);
-        }
+        
     }
 }

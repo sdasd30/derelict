@@ -17,8 +17,6 @@ public class PlayerManager : MonoBehaviour
             random = Random.Range(0, room.positions.Count - 1);
         }
 
-        Debug.Log("Done!" + room.positions[random]);
-
         position.SetPosition(room.positions[random]);
 
     }
