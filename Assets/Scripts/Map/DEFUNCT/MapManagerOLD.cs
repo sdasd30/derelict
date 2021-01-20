@@ -1,9 +1,10 @@
-﻿using System.Collections;
+﻿/*
+using System.Collections;
 using System; //So the script can use serialization commands.
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapManager
+public class MapManagerOLD
 {
     public static Tile[,] map; //This is the map with information of all tiles.
     public static List<Feature> allFeatures;
@@ -81,3 +82,4 @@ public class Path
 
 }
 
+*/
