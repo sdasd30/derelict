@@ -1,7 +1,0 @@
-Map - This is for the floors and walls. The most interactability there should be is attacking walls. Doors go under objects.
-
-Objects - These are things that can be interacted with by the player. Stuff like lockers or crates.
-
-Player - Things to do with the player
-
-Entities - Things that interact back at the player. So, things like enemies.
