@@ -596,7 +596,6 @@ GameObject:
   - component: {fileID: 920811234}
   - component: {fileID: 920811236}
   - component: {fileID: 920811235}
-  - component: {fileID: 920811237}
   m_Layer: 8
   m_Name: Tilemap
   m_TagString: Untagged
@@ -731,26 +730,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &920811237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920811233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cacc1d12246dff1448936af100bf0eea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  missingTile: {fileID: 11400000, guid: d40aa7cb586d6f54688665c42cd5d4ea, type: 2}
-  floorTile: {fileID: 11400000, guid: 8e1ce58afe701b743a2d34ed394e7117, type: 2}
-  wallTile: {fileID: 11400000, guid: 06234a2fd5b735a4d8efc0c42dbfdfea, type: 2}
-  doorTile: {fileID: 11400000, guid: 804df94cf8b23be43917de634db2f37f, type: 2}
-  walkTile: {fileID: 0}
-  hullTile: {fileID: 0}
-  debugTile: {fileID: 0}
-  uglyDoor: 0
 --- !u!1 &1172247246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,13 +1070,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44507bac5d9e93d4285256ea76d8cb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 200
-  mapHeight: 200
-  widthMinRoom: 10
-  widthMaxRoom: 20
-  heightMinRoom: 10
-  heightMaxRoom: 20
-  maxFeatures: 200
+  mapWidth: 300
+  mapHeight: 300
+  widthMinRoom: 5
+  widthMaxRoom: 5
+  heightMinRoom: 5
+  heightMaxRoom: 5
+  maxFeatures: 70
   maxAttempts: 500000
   featureCount: 0
 --- !u!4 &1652558252
@@ -1280,7 +1259,10 @@ GameObject:
   - component: {fileID: 2083718974}
   - component: {fileID: 2083718976}
   - component: {fileID: 2083718975}
+  - component: {fileID: 2083718979}
   - component: {fileID: 2083718977}
+  - component: {fileID: 2083718980}
+  - component: {fileID: 2083718978}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1415,3 +1397,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb9193aa2a06da44a9d170c4520818b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2083718978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083718970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa56cb401081c30409614f922ba58f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 20
+--- !u!114 &2083718979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083718970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc278af6c74cd2a4585733f097e7dec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2083718980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083718970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27a277f2f2c155c48952af9ed9364d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 16
