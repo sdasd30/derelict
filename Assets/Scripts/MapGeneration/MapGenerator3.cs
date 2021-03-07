@@ -54,15 +54,16 @@ public class MapGenerator3 : MonoBehaviour
         crt.RenderText(cellsWidth, cellsHeight);
     }
 
-    void CreateRoomCells()
+    void CreateRoomCells() //This is the script that generates the rooms themselves
     {
 
-        Vector2Int location = new Vector2Int(Random.Range(0,cellsWidth),Random.Range(0,cellsHeight));
+        Vector2Int location; //= new Vector2Int(Random.Range(0,cellsWidth),Random.Range(0,cellsHeight));
         int currentID = 0;
-        bool failCond = false;
+        bool failCond;
 
         for (int i = 0; i < maxRooms; i++)
         {
+            failCond = false;
             for (int c = 0; c < maxAttempts; c++)
             {
                 int roomSize = Random.Range(roomMinCells, roomMaxCells);
@@ -73,7 +74,7 @@ public class MapGenerator3 : MonoBehaviour
                     break;
                 }
 
-                if (c == maxAttempts - 2)
+                if (c == maxAttempts - 1)
                 {
                     failCond = true;
                     break;
@@ -81,16 +82,27 @@ public class MapGenerator3 : MonoBehaviour
             }
             if (failCond)
             {
-                Debug.Log("fail state");
+                Debug.LogError("fail state");
                 break;
             }
             currentID++;
         }
 
         Debug.Log("Done generating map. " + currentID +" rooms generated");
+        /*
+        foreach (Cell cel in MapManager.cells)
+        {
+            cel.sameRoomNeighbors = SameRoomDirections(cel, MapManager.cells);
+            /*
+            Debug.Log("Cell (room ID :" + cel.ID + ") at " + cel.location.x + "," +
+                cel.location.y + "is connected to rooms " + cel.sameRoomNeighbors.Count);
+            
+        }*/
+        
     }
 
-    void GenerateRoom(int count, Vector2Int cellLocation, int ID, int maxRoom)
+    void GenerateRoom(int count, Vector2Int cellLocation, int ID, int maxRoom) 
+        //This script makes a singular room, and assigns its values.
     {
 
         if (count == maxRoom)
@@ -114,7 +126,8 @@ public class MapGenerator3 : MonoBehaviour
 
     }
 
-    Vector2Int CheckForFreeNeighbors(Vector2Int cellLocation)
+    Vector2Int CheckForFreeNeighbors(Vector2Int cellLocation) 
+        //This script looks around and checks for empty space.
     {
         Vector2Int newDirection = cellLocation;
         bool foundDirection = false;
@@ -134,7 +147,7 @@ public class MapGenerator3 : MonoBehaviour
                     }
                     break;
                 case 1:
-                    if (cellLocation.x - 1 >= 0 && //Check East
+                    if (cellLocation.x - 1 >= 0 && //Check West
                     MapManager.cells[cellLocation.x - 1, cellLocation.y].exists == false)
                     {
                         newDirection = new Vector2Int(cellLocation.x - 1, cellLocation.y);
@@ -170,4 +183,57 @@ public class MapGenerator3 : MonoBehaviour
         }
         return newDirection;
     }
+
+    List<Direction> SameRoomDirections(Cell checkCell, Cell[,] celmap)
+    //What rooms next to this room are the same room?
+    {
+        List<Direction> dirs = new List<Direction>();
+        int indexX = checkCell.location.x;
+        int indexY = checkCell.location.y;
+
+        if (!(indexY + 1 >= cellsHeight) && 
+            checkCell.ID == celmap[indexX, indexY + 1].ID) //Check North
+        {
+            dirs.Add(Direction.NORTH);
+        }
+        if (!(indexX + 1 >= cellsWidth) &&
+            checkCell.ID == celmap[indexX + 1, indexY].ID) //Check East
+        {
+            dirs.Add(Direction.EAST);
+        }
+        if (!(indexY - 1 < 0) && 
+            checkCell.ID == celmap[indexX, indexY - 1].ID) //Check South
+        {
+            dirs.Add(Direction.SOUTH);
+        }
+        if (!(indexX - 1 < 0) && 
+            checkCell.ID == celmap[indexX - 1, indexY].ID) //Check West
+        {
+            dirs.Add(Direction.WEST);
+        }
+
+        if (!(indexY + 1 >= cellsHeight) && !(indexX + 1 >= cellsWidth) &&
+            checkCell.ID == celmap[indexX + 1, indexY + 1].ID) //Check NE
+        {
+            dirs.Add(Direction.NE);
+        }
+        if (!(indexY - 1 < 0) && !(indexX + 1 >= cellsWidth) &&
+            checkCell.ID == celmap[indexX + 1, indexY - 1].ID) //Check SE
+        {
+            dirs.Add(Direction.SE);
+        }
+        if (!(indexY - 1 < 0 ) && !(indexX - 1 < 0) &&
+            checkCell.ID == celmap[indexX - 1, indexY - 1].ID) //Check SW
+        {
+            dirs.Add(Direction.SW);
+        }
+        if (!(indexY + 1 >= cellsHeight) && !(indexX - 1 < 0) &&
+            checkCell.ID == celmap[indexX - 1, indexY + 1].ID) //Check NW
+        {
+            dirs.Add(Direction.NW);
+        }
+
+        return dirs;
+    }
 }
+

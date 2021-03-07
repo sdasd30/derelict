@@ -536,7 +536,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 265.79407, w: 0}
+  m_margin: {x: 33.836517, y: 0, z: -0.3861084, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -732,14 +732,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a47986813b41d0418ab0311fa7dfdb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellsWidth: 5
-  cellsHeight: 5
+  cellsWidth: 40
+  cellsHeight: 40
   roomWidth: 20
   roomHeight: 20
   maxRooms: 10
-  maxAttempts: 50000
-  roomMaxCells: 20
-  roomMinCells: 1
+  maxAttempts: 256000
+  roomMaxCells: 80
+  roomMinCells: 60
 --- !u!114 &1574050641
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class MapManager : MonoBehaviour //This is about the tilemap. The surface
     public static List<Feature> features;
 }
 
-public enum Direction { NORTH, SOUTH, EAST, WEST }
+public enum Direction { NORTH, SOUTH, EAST, WEST, NE, SE, SW, NW}
 
 [Serializable] //Makes the class serializatble. This makes it saveable.
 public class Tile
@@ -35,7 +35,9 @@ public class Cell //Each cell will possibly contain a room.
     public string type; //Is this a room or a hallway?
     public Vector2Int location; //Which cell does this cell occupy?
     public bool exists = false; //Does this cell currently contain a room?
-    public List<int> connectedRoomID;
+
+    public List<Direction> doorwayConnections; //This is for doorway connections
+    public List<Direction> sameRoomNeighbors; //This is for neighboring doors.
 }
 
 [Serializable]
