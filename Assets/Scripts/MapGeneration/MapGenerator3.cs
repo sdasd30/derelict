@@ -6,7 +6,7 @@ public class MapGenerator3 : MonoBehaviour
 {
     public int cellsWidth;
     public int cellsHeight;
-    //How large is the cells? (This determines how many rooms can potentially exist.
+    //How many cells? (This determines how many rooms can potentially exist.
 
     public int roomWidth;
     public int roomHeight;
@@ -19,7 +19,7 @@ public class MapGenerator3 : MonoBehaviour
     public int roomMinCells;
     //What is the largest and smallest amount of cells a room can occupy?
 
-    CellReadText crt;
+    RoomReadText rrt;
 
     private void Start()
     {
@@ -49,9 +49,125 @@ public class MapGenerator3 : MonoBehaviour
         }
 
         CreateRoomCells();
-        crt = FindObjectOfType<CellReadText>();
+        CellstoTiles();
+        //rrt = FindObjectOfType<RoomReadText>();
+        GetComponent<RoomReadToTile>().DrawMap();
+        //rrt.RenderText(cellsWidth * roomWidth, cellsHeight * roomHeight);
+    }
 
-        crt.RenderText(cellsWidth, cellsHeight);
+
+    void CellstoTiles() //This script takes the cells, and converts them into rooms.
+    {
+        for (int y = 0; y < cellsHeight; y++)
+        {
+            for (int x = 0; x < cellsWidth; x++)
+            {
+                if (MapManager.cells[x, y].exists)
+                {
+                    MapTiles(MapManager.cells[x, y]);
+                }
+            }
+        }
+
+        foreach (Tile tile in MapManager.map)
+        {
+            
+        }
+
+    }
+
+    void MapTiles(Cell cell) //This script turns a cell's location into tiles. Both floors and walls are accounted for.
+    {
+        Vector2Int roomTopLeft = new Vector2Int(cell.location.x * roomWidth, cell.location.y * roomHeight);
+
+        for (int ry = 0; ry < roomHeight; ry++)
+        {
+            for (int rx = 0; rx < roomWidth; rx++)
+            {
+                MapManager.map[roomTopLeft.x + rx, roomTopLeft.y + ry] = new Tile();
+                MapManager.map[roomTopLeft.x + rx, roomTopLeft.y + ry].position = new Vector2Int(roomTopLeft.x + rx, roomTopLeft.y + ry);
+                MapManager.map[roomTopLeft.x + rx, roomTopLeft.y + ry].type = "floor";
+                MapManager.map[roomTopLeft.x + rx, roomTopLeft.y + ry].sprite = "floor";
+                MapManager.map[roomTopLeft.x + rx, roomTopLeft.y + ry].roomID = cell.ID;
+            }
+
+        }
+
+        if (!cell.sameRoomNeighbors.Contains(Direction.NORTH))
+        {
+            for (int rx = 0; rx < roomWidth; rx++)
+            {
+                MapManager.map[roomTopLeft.x + rx, roomTopLeft.y].type = "Nwall";
+                MapManager.map[roomTopLeft.x + rx, roomTopLeft.y].sprite = "wall";
+            }
+        }
+        if (!cell.sameRoomNeighbors.Contains(Direction.EAST))
+        {
+
+            for (int ry = 0; ry < roomHeight; ry ++)
+            {
+                MapManager.map[roomTopLeft.x + roomWidth - 1, roomTopLeft.y + ry].type = "Ewall";
+                MapManager.map[roomTopLeft.x + roomWidth - 1, roomTopLeft.y + ry].sprite = "wall";
+            }
+        }
+        if (!cell.sameRoomNeighbors.Contains(Direction.SOUTH))
+        {
+            for (int rx = 0; rx < roomWidth; rx++)
+            {
+                MapManager.map[roomTopLeft.x + rx, roomTopLeft.y + roomHeight - 1].type = "Swall";
+                MapManager.map[roomTopLeft.x + rx, roomTopLeft.y + roomHeight - 1].sprite = "wall";
+            }
+        }
+        if (!cell.sameRoomNeighbors.Contains(Direction.WEST))
+        {
+            for (int ry = 0; ry < roomHeight; ry++)
+            {
+                MapManager.map[roomTopLeft.x, roomTopLeft.y + ry].type = "Wwall";
+                MapManager.map[roomTopLeft.x, roomTopLeft.y + ry].sprite = "wall";
+            }
+        }
+
+        //Check Top Left Corner WORKS
+        if (cell.sameRoomNeighbors.Contains(Direction.WEST) &&
+            cell.sameRoomNeighbors.Contains(Direction.NORTH) &&
+            !cell.sameRoomNeighbors.Contains(Direction.NW))
+        {
+            MapManager.map[roomTopLeft.x, roomTopLeft.y].type = "corner";
+            MapManager.map[roomTopLeft.x, roomTopLeft.y].sprite = "wall";
+        }
+
+        //Check Top right corner WORKS
+        if (cell.sameRoomNeighbors.Contains(Direction.EAST) &&
+           cell.sameRoomNeighbors.Contains(Direction.NORTH) &&
+            !cell.sameRoomNeighbors.Contains(Direction.NE))
+        {
+            MapManager.map[roomTopLeft.x + roomHeight - 1, roomTopLeft.y].type = "corner";
+            MapManager.map[roomTopLeft.x + roomHeight - 1, roomTopLeft.y].sprite = "wall";
+           
+        }
+
+        //Check Bottom Left WORKS
+        if (cell.sameRoomNeighbors.Contains(Direction.SOUTH) &&
+            cell.sameRoomNeighbors.Contains(Direction.WEST) &&
+           !cell.sameRoomNeighbors.Contains(Direction.SW))
+        {
+            MapManager.map[roomTopLeft.x, roomTopLeft.y + roomHeight - 1].type = "corner";
+            MapManager.map[roomTopLeft.x, roomTopLeft.y + roomHeight - 1].sprite = "wall";
+        }
+
+        //Checkt Bottom Right WORKS
+        if (cell.sameRoomNeighbors.Contains(Direction.SOUTH) &&
+           cell.sameRoomNeighbors.Contains(Direction.EAST) &&
+           !cell.sameRoomNeighbors.Contains(Direction.SE))
+        {
+            MapManager.map[roomTopLeft.x + roomWidth - 1, roomTopLeft.y + roomHeight - 1].type = "corner";
+            MapManager.map[roomTopLeft.x + roomWidth - 1, roomTopLeft.y + roomHeight - 1].sprite = "wall";
+        }
+    }
+
+    void ValidDoorTile(Tile tile)
+    {
+        //TODO
     }
 
     void CreateRoomCells() //This is the script that generates the rooms themselves
@@ -89,15 +205,15 @@ public class MapGenerator3 : MonoBehaviour
         }
 
         Debug.Log("Done generating map. " + currentID +" rooms generated");
-        /*
+        
         foreach (Cell cel in MapManager.cells)
         {
             cel.sameRoomNeighbors = SameRoomDirections(cel, MapManager.cells);
             /*
             Debug.Log("Cell (room ID :" + cel.ID + ") at " + cel.location.x + "," +
                 cel.location.y + "is connected to rooms " + cel.sameRoomNeighbors.Count);
-            
-        }*/
+            */
+        }
         
     }
 
@@ -192,9 +308,9 @@ public class MapGenerator3 : MonoBehaviour
         int indexY = checkCell.location.y;
 
         if (!(indexY + 1 >= cellsHeight) && 
-            checkCell.ID == celmap[indexX, indexY + 1].ID) //Check North
+            checkCell.ID == celmap[indexX, indexY + 1].ID) //Check South
         {
-            dirs.Add(Direction.NORTH);
+            dirs.Add(Direction.SOUTH);
         }
         if (!(indexX + 1 >= cellsWidth) &&
             checkCell.ID == celmap[indexX + 1, indexY].ID) //Check East
@@ -202,9 +318,9 @@ public class MapGenerator3 : MonoBehaviour
             dirs.Add(Direction.EAST);
         }
         if (!(indexY - 1 < 0) && 
-            checkCell.ID == celmap[indexX, indexY - 1].ID) //Check South
+            checkCell.ID == celmap[indexX, indexY - 1].ID) //Check North
         {
-            dirs.Add(Direction.SOUTH);
+            dirs.Add(Direction.NORTH);
         }
         if (!(indexX - 1 < 0) && 
             checkCell.ID == celmap[indexX - 1, indexY].ID) //Check West
@@ -213,24 +329,24 @@ public class MapGenerator3 : MonoBehaviour
         }
 
         if (!(indexY + 1 >= cellsHeight) && !(indexX + 1 >= cellsWidth) &&
-            checkCell.ID == celmap[indexX + 1, indexY + 1].ID) //Check NE
-        {
-            dirs.Add(Direction.NE);
-        }
-        if (!(indexY - 1 < 0) && !(indexX + 1 >= cellsWidth) &&
-            checkCell.ID == celmap[indexX + 1, indexY - 1].ID) //Check SE
+            checkCell.ID == celmap[indexX + 1, indexY + 1].ID) //Check SE
         {
             dirs.Add(Direction.SE);
         }
-        if (!(indexY - 1 < 0 ) && !(indexX - 1 < 0) &&
-            checkCell.ID == celmap[indexX - 1, indexY - 1].ID) //Check SW
+        if (!(indexY - 1 < 0) && !(indexX + 1 >= cellsWidth) &&
+            checkCell.ID == celmap[indexX + 1, indexY - 1].ID) //Check NE
         {
-            dirs.Add(Direction.SW);
+            dirs.Add(Direction.NE);
         }
-        if (!(indexY + 1 >= cellsHeight) && !(indexX - 1 < 0) &&
-            checkCell.ID == celmap[indexX - 1, indexY + 1].ID) //Check NW
+        if (!(indexY - 1 < 0) && !(indexX - 1 < 0) &&
+            checkCell.ID == celmap[indexX - 1, indexY - 1].ID) //Check NW
         {
             dirs.Add(Direction.NW);
+        }
+        if (!(indexY + 1 >= cellsHeight) && !(indexX - 1 < 0) &&
+            checkCell.ID == celmap[indexX - 1, indexY + 1].ID) //Check SW
+        {
+            dirs.Add(Direction.SW);
         }
 
         return dirs;

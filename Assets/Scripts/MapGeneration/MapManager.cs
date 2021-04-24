@@ -26,12 +26,14 @@ public class Tile
     public bool isVisible = false;
     public bool isOpaque = false;
     public bool isExplored = false;
+
+    public int roomID;
 }
 
 [Serializable]
 public class Cell //Each cell will possibly contain a room.
 {
-    public int ID; //Which room is this?
+    public int ID = -1; //Which room is this?
     public string type; //Is this a room or a hallway?
     public Vector2Int location; //Which cell does this cell occupy?
     public bool exists = false; //Does this cell currently contain a room?

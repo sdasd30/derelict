@@ -72,11 +72,11 @@ public class RenderTilemap : MonoBehaviour
             }
         }
 
-        foreach (Tile tile in MapManager.map)
-        {
-            gridMap.SetTileFlags(new Vector3Int(tile.position.x, tile.position.y, 0), TileFlags.None);
-            gridMap.SetColor(new Vector3Int(tile.position.x, tile.position.y, 0), Color.clear);
-        }
+        //foreach (Tile tile in MapManager.map)
+        //{
+        //    gridMap.SetTileFlags(new Vector3Int(tile.position.x, tile.position.y, 0), TileFlags.None);
+        //    gridMap.SetColor(new Vector3Int(tile.position.x, tile.position.y, 0), Color.clear);
+        //}
     }
 
     public void UpdateVisibility()
@@ -96,7 +96,7 @@ public class RenderTilemap : MonoBehaviour
 
     private void Update()
     {
-        UpdateVisibility();
+        //UpdateVisibility();
     }
 
     public void ClearMap()
