@@ -26,33 +26,54 @@ public class MapGenerator3 : MonoBehaviour
         GenerateMap();
     }
 
-    public void InitializeMap()
+    public void InitializeMap() //Also usable to clear the map.
     {
         MapManager.cells = new Cell[cellsWidth, cellsHeight];
-        MapManager.features = new List<Feature>();
         MapManager.map = new Tile[cellsWidth * roomWidth, cellsHeight * roomWidth];
 
     }
 
-    // Update is called once per frame
     public void GenerateMap()
     {
-        InitializeMap();
+        GeneratedConnected();
 
-        
-        for (int y = 0; y < cellsHeight; y++)
+        GetComponent<RoomReadToTile>().DrawMap(); //DEBUG
+    }
+
+    void GeneratedConnected()
+    {
+        int i = 0;
+        while(true)
         {
-            for (int x = 0; x < cellsWidth; x++)
+            i++;
+            InitializeMap();
+            for (int y = 0; y < cellsHeight; y++)
             {
-                MapManager.cells[x,y] = new Cell();
+                for (int x = 0; x < cellsWidth; x++)
+                {
+                    MapManager.cells[x, y] = new Cell();
+                }
             }
+            Debug.Log("Generating map... (Attempt " + i + ")");
+
+
+            CreateRoomCells();
+            CellstoTiles();
+
+            if (GetComponent<MapGraph>().CellsCheck())
+            {
+                Debug.Log("Map successfully generated!");
+                return;
+            }
+            if (i == 100)
+            {
+                Debug.LogError("Could not generate map after 100 attempts. Rooms are either too small, there are not enough, or the map is too large. Try making the rooms more connection friendly.");
+                //InitializeMap();
+                return;
+            }
+            Debug.LogWarning("Map was not connected. Attemptting again");
         }
 
-        CreateRoomCells();
-        CellstoTiles();
-        //rrt = FindObjectOfType<RoomReadText>();
-        GetComponent<RoomReadToTile>().DrawMap();
-        //rrt.RenderText(cellsWidth * roomWidth, cellsHeight * roomHeight);
     }
 
 
@@ -68,12 +89,6 @@ public class MapGenerator3 : MonoBehaviour
                 }
             }
         }
-
-        foreach (Tile tile in MapManager.map)
-        {
-            
-        }
-
     }
 
     void MapTiles(Cell cell) //This script turns a cell's location into tiles. Both floors and walls are accounted for.
@@ -204,7 +219,7 @@ public class MapGenerator3 : MonoBehaviour
             currentID++;
         }
 
-        Debug.Log("Done generating map. " + currentID +" rooms generated");
+        //Debug.Log("Done generating map. " + currentID +" rooms generated");
         
         foreach (Cell cel in MapManager.cells)
         {

@@ -1,0 +1,70 @@
+ALERCON
+
+7 CLEAR SKY
+	No alarm. Civil activities open and free. Military activities minimal.
+6 OPEN FIELD
+	Standard Peace Alarm. Civil Activities monitored. Military is standard readiness
+5 BLACK LIGHT
+	Warning condition. Civil Activities monitored. Military is active
+4 OPEN EYES
+	Cold War condition. Civil Activities Limited in certain areas and monitored. Military is active and in combat
+3 NEXT STEP 
+	Activly at war with minor power. Civil activites restricted in certain areas and monitored. Military is active and in combat.
+2 HOT LOOP
+	Activly at war with major threat. Civil activites controlled. Military is active and integrated
+1 ONE AHEAD
+	Wartime Stress Condition. Only absolutely vital civil activies. Military is fully active and integrated.
+0 GLORY SUN
+	War is active and hot. No civil activites. Military fully active and integrated
+	
+
+The types of FTL in order of appearance from oldest to newest.
+Reference Shifting (RS)
+	Refrence Shift Drives (RSD) speed up the local time in a small bubble around the drive. This causes the outerworld to slow down dramatically. 
+	Both sides of the bubble will experience time as normal, however, outsiders viewing the bubble will see an incredibly sped up time, while those within the bubble looking
+	out will see an incredibly slow time. Useful for colony ships, where the time within the ship does not matter as much as getting there quickly. Very terrible for shuttles, which
+	are about moving people comfortably and quickly.
+	
+	Speed: Fast. (On the outside). Extraordinarily slow (On the inside)
+	
+Hyperlanes
+	A network of "Hyperlanes" are utilized by hyperdrives. Hyperdrives "ride" the hyperlanes, which were constructed eons ago by a mysterious alien species which no longer
+	exists. Hyperdrives ride the hyperlane by anchoring themselves to it, and tunneling through dimensions and end up on the other end.
+	It wasn't understood until subspace tunneling was developed. Hyperlanes are actually simply safe developed routes of subspace travel.
+	
+	Speed: Very fast.
+
+Hypersurfing
+	A variation on frame shifting. FSDs lightly anchor the ship into place just enough to cause the ship to move FTL, but not enough to move incredibly fast that the crew loses control.
+	Useful as it comes standard with any ship that features an FSD. Good for short ranged jumps. Bad for interstellar distances.
+	
+	Speed: Very slow.
+
+Frame Shifting (FS)
+	Frame shift drives (FSD) anchors the ship into place, and allow the universe to move around them. This causes the ship to move relative throughout space. It is difficult to steer,
+	but the speed is good, and it does not cause any issues with local or universal time. Good for people traned in FSD jumping (Such as exploreres), bad for casual jumping, as the 
+	jumper can potentially get lost in space without any way out.
+	
+	Speed: Fast
+	
+
+Subspace Tunneling
+
+
+Scale of Ship Sizes
+Small to large
+
+Racer
+	Crew: 1
+	Desc: A small single person spacecraft. Often unpressurized. For pleasure, and has no fighting capabilities.
+	FTL: No
+Fighter
+	Crew: 1-3
+	Desc: A small spacecraft for engaging points on larger spacecraft. Dogfighting is rare, and often left for automated defense grids. Fast, manuverable, but unpressurized.
+	FTL: No
+Explorers
+	Crew: 1-4
+	Desc: A lightweight ship that is capable of moving long distances. Often poorly equipped for combat, but relativley comfortable for its size, as it needs to sustain its crew for a significant amount of time in deep space.
+	FTL: Yes (Hyperlane
+Shuttle
+	Crew:

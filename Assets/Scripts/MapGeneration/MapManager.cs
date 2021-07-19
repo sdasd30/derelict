@@ -8,7 +8,7 @@ public class MapManager : MonoBehaviour //This is about the tilemap. The surface
 {
     public static Tile[,] map; //This is the map with information of all tiles.
     public static Cell[,] cells; //This is the map with information of all tiles.
-    public static List<Feature> features;
+    public static List<Room> rooms;
 }
 
 public enum Direction { NORTH, SOUTH, EAST, WEST, NE, SE, SW, NW}
@@ -43,15 +43,10 @@ public class Cell //Each cell will possibly contain a room.
 }
 
 [Serializable]
-public class Feature
+public class Room
 { // A class for saving the feature (corridor or room) information, for the dungeon generation algorithm
-    public List<Vector2Int> positions;
-    public string type; //This is to determine if the room is a hallway or a proper room
-    public string roomType; //This is to determine what kind of room it will be. Medical? Engineering? Food? Reactor?
-    public int width;
-    public int height;
-    public int ID; //For map generation
-
-    public Vector2 centerPoint; //This is for delaunay triangulation.
+    public List<Room> neighbors;
+    public int size;
+    public int ID;
 }
 
