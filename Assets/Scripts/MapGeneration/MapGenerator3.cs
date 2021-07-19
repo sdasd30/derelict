@@ -36,6 +36,7 @@ public class MapGenerator3 : MonoBehaviour
     public void GenerateMap()
     {
         GeneratedConnected();
+        GenerateDoors();
 
         GetComponent<RoomReadToTile>().DrawMap(); //DEBUG
     }
@@ -67,13 +68,17 @@ public class MapGenerator3 : MonoBehaviour
             }
             if (i == 100)
             {
-                Debug.LogError("Could not generate map after 100 attempts. Rooms are either too small, there are not enough, or the map is too large. Try making the rooms more connection friendly.");
+                Debug.LogError("Could not generate map after 100 attempts. Rooms are either too small, " +
+                    "there are not enough, or the map is too large. Try making the rooms more connection friendly.");
                 //InitializeMap();
                 return;
             }
-            Debug.LogWarning("Map was not connected. Attemptting again");
         }
+    }
 
+    void GenerateDoors()
+    {
+        return;
     }
 
 
