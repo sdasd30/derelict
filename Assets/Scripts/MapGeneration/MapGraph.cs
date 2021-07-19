@@ -40,13 +40,13 @@ public class MapGraph : MonoBehaviour
         return universe[cell];
     }
 
-    void Union(int[] uni, int c1, int c2)
+    void Union(int c1, int c2)
     {
         if (c1 == -1 || c2 == -1)
         {
             return;
         }
-        uni[Find(c1)] = Find(c2);
+        universe[Find(c1)] = Find(c2);
     }
 
     int CountCellTypes()
