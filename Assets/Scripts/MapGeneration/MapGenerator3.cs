@@ -20,10 +20,13 @@ public class MapGenerator3 : MonoBehaviour
     //What is the largest and smallest amount of cells a room can occupy?
 
     RoomReadText rrt;
+    DoorGenerator doorGenerator;
 
     private void Start()
     {
+        doorGenerator = GetComponent<DoorGenerator>();
         GenerateMap();
+        
     }
 
     public void InitializeMap() //Also usable to clear the map.
@@ -60,8 +63,9 @@ public class MapGenerator3 : MonoBehaviour
 
             CreateRoomCells();
             CellstoTiles();
+            doorGenerator.Run();
 
-            if (GetComponent<MapGraph>().CellsCheck())
+            if (doorGenerator.GetComponent<DoorGraph>().IsConnected())
             {
                 Debug.Log("Map successfully generated!");
                 return;
@@ -79,7 +83,7 @@ public class MapGenerator3 : MonoBehaviour
     void GenerateDoors()
     {
         return;
-    }
+    } //TODO
 
 
     void CellstoTiles() //This script takes the cells, and converts them into rooms.

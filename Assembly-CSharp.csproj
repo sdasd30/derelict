@@ -61,13 +61,12 @@
     <Compile Include="Assets\Scripts\MapGeneration\CellMap.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MapManager.cs" />
     <Compile Include="Assets\Scripts\FollowObject.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\DoorGraph.cs" />
     <Compile Include="Assets\Scripts\GameObject\TilePosition.cs" />
+    <Compile Include="Assets\Scripts\MapGeneration\DoorGenerator.cs" />
     <Compile Include="Assets\Scripts\GameObject\PositionToGrid.cs" />
     <Compile Include="Assets\Scripts\DEBUG\RoomReadToTile.cs" />
     <Compile Include="Assets\Scripts\MapGeneration\MapGenerator3.cs" />
-    <Compile Include="Assets\Scripts\MapGeneration\DoorGenerator.cs" />
-    <Compile Include="Assets\Scripts\MapGeneration\MapGraph.cs" />
-    <Compile Include="Assets\Scripts\MapGeneration\DoorGraph.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

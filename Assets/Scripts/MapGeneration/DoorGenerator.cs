@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(DoorGraph))]
+
 public class DoorGenerator : MonoBehaviour
 {
+    //This script builds the doors, but does not handle the logic of where doors go. 
+    //That honor goes to the DoorGraph script.
+
     List<DoorCell> DoorCells;
-    // Start is called before the first frame update
-    void Start()
+
+    public void Run()
     {
-        
+        GetComponent<DoorGraph>().Run();
     }
 
     // Update is called once per frame
