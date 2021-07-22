@@ -16,8 +16,15 @@ public class DoorGraph : MonoBehaviour
     {
         FillVertices();
         universe = new int[Vertices.Length];
+
+        for (int i = 0; i < universe.Length; i++)
+        {
+            universe[i] = i;
+        }
+
         GenerateInitialGraph();
         Debug.Log(IsConnected());
+        DEBUGPrintGraph();
     }
 
     void MakeConnection(int from, int to)
@@ -57,6 +64,18 @@ public class DoorGraph : MonoBehaviour
         }
     }
 
+    void DEBUGPrintGraph()
+    {
+        foreach (Vertex vertex in Vertices)
+        {
+            //Debug.Log("Vertex " + vertex.id + " connected to:");
+            foreach (int item in vertex.adj)
+            {
+                //Debug.Log(item);
+            }
+        }
+    }
+
     void GenerateInitialGraph()
     {
         int thisCell = -1;
@@ -77,39 +96,7 @@ public class DoorGraph : MonoBehaviour
         }
     }
 
-    HashSet<int> NeighborID(Cell checkCell)
-    //What rooms next to this room are the same room?
-    {
-        HashSet<int> cells = new HashSet<int>();
-        Cell[,] celmap = MapManager.cells;
-        int indexX = checkCell.location.x;
-        int indexY = checkCell.location.y;
 
-        if (!(indexY + 1 >= celmap.GetLength(0)) &&
-            checkCell.ID != celmap[indexX, indexY + 1].ID) //Check South
-        {
-            cells.Add(celmap[indexX, indexY + 1].ID);
-        }
-        if (!(indexX + 1 >= celmap.GetLength(1)) &&
-            checkCell.ID != celmap[indexX + 1, indexY].ID) //Check East
-        {
-            cells.Add(celmap[indexX + 1, indexY].ID);
-        }
-        if (!(indexY - 1 < 0) &&
-            checkCell.ID != celmap[indexX, indexY - 1].ID) //Check North
-        {
-            cells.Add(celmap[indexX, indexY - 1].ID);
-        }
-        if (!(indexX - 1 < 0) &&
-            checkCell.ID != celmap[indexX - 1, indexY].ID) //Check West
-        {
-            cells.Add(celmap[indexX - 1, indexY].ID);
-        }
-
-        cells.Remove(-1);
-
-        return cells;
-    }
 
 
 
@@ -166,16 +153,50 @@ public class DoorGraph : MonoBehaviour
         return true;
     }
 
+
+    HashSet<int> NeighborID(Cell checkCell)
+    //What rooms next to this room are the same room?
+    {
+        HashSet<int> cells = new HashSet<int>();
+        Cell[,] celmap = MapManager.cells;
+        int indexX = checkCell.location.x;
+        int indexY = checkCell.location.y;
+
+        if (!(indexY + 1 >= celmap.GetLength(0)) &&
+            checkCell.ID != celmap[indexX, indexY + 1].ID) //Check South
+        {
+            cells.Add(celmap[indexX, indexY + 1].ID);
+        }
+        if (!(indexX + 1 >= celmap.GetLength(1)) &&
+            checkCell.ID != celmap[indexX + 1, indexY].ID) //Check East
+        {
+            cells.Add(celmap[indexX + 1, indexY].ID);
+        }
+        if (!(indexY - 1 < 0) &&
+            checkCell.ID != celmap[indexX, indexY - 1].ID) //Check North
+        {
+            cells.Add(celmap[indexX, indexY - 1].ID);
+        }
+        if (!(indexX - 1 < 0) &&
+            checkCell.ID != celmap[indexX - 1, indexY].ID) //Check West
+        {
+            cells.Add(celmap[indexX - 1, indexY].ID);
+        }
+
+        cells.Remove(-1);
+
+        return cells;
+    }
 }
 
 class Vertex
 {
     public int id;
-    public List<int> adj;
+    public HashSet<int> adj;
 
     public Vertex(int i)
     {
         id = i;
-        adj = new List<int>();
+        adj = new HashSet<int>();
     }
 }

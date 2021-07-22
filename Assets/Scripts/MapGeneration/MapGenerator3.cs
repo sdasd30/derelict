@@ -42,6 +42,7 @@ public class MapGenerator3 : MonoBehaviour
         GenerateDoors();
 
         GetComponent<RoomReadToTile>().DrawMap(); //DEBUG
+        //FindObjectOfType<CellReadText>().RenderText(cellsWidth,cellsHeight);
     }
 
     void GeneratedConnected()

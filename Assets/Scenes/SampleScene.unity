@@ -1041,6 +1041,8 @@ GameObject:
   - component: {fileID: 1574050638}
   - component: {fileID: 1574050643}
   - component: {fileID: 1574050644}
+  - component: {fileID: 1574050646}
+  - component: {fileID: 1574050645}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -1084,10 +1086,10 @@ MonoBehaviour:
   cellsHeight: 10
   roomWidth: 6
   roomHeight: 6
-  maxRooms: 10
+  maxRooms: 20
   maxAttempts: 256000
-  roomMaxCells: 6
-  roomMinCells: 2
+  roomMaxCells: 12
+  roomMinCells: 6
 --- !u!114 &1574050641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,6 +1145,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 778df2e8b10d5cf49b578c05eb7226ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1574050645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574050637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 784173590b4eb4049bf9b7458425d4a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1574050646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574050637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14766f8ac305ed44a2607b380c1e5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2008039322
